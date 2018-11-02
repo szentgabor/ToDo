@@ -1,0 +1,66 @@
+﻿@model TodoList.ViewModels.TodoAssignee
+@{
+    ViewData["Title"] = "List";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>List of Todos</title>
+</head>
+<body>
+    <h2>Todo List DB</h2>
+    <a href="/todo/add" target="_self">Click here to add a Todo!</a><br />
+    <a href="/addassignee" target="_self">Click here to add an Assignee!</a><br />
+    <a href="/assignee" target="_blank">Click here to see the list of assignees!</a>
+    <form>
+        Search by Title, Content, Due Date, Creation Date or Name of Assignee:
+        <input type="text" name="incomingSearch" value="">
+        <input type="submit" value="Search">
+    </form>
+    @if (Model.Todos.Count() > 0)
+    {<table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Assignee</th>
+                <th>Due Date</th>
+                <th>Done</th>
+                <th>Priority</th>
+                <th>Remove ToDos</th>
+                <th>Edit</th>
+            </tr>
+            @foreach (var item in Model.Todos)
+            {
+                var urgent = (item.IsUrgent) ? "danger" : "";
+                var done = (item.IsDone) ? "success" : "";
+                if (done.Length > 0) { urgent = ""; }
+
+            <tr class="@done @urgent">
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                @if (item.Assignee != null)
+                {
+                <td>
+                <a href="/@item.AssigneeID/assigneetodos" target="_blank">@item.Assignee.Name</a>
+                </td>
+                }
+                else
+                { <td></td>}
+                <td>@item.DueDate</td>
+                <td>
+                    @item.IsDone.ToString()
+                </td>
+                <td>
+                    @item.IsUrgent
+                </td>
+                <td>
+                    <form action="/@item.Id/delete" method="post">
+                        <input type="submit" value="Remove" class="btn btn-danger">
+                    </form>
+                </td>
+                <td>
+                    <a href="/@item.Id/edit" target="_self">Edit Todo</a>
+                </td>
+            </tr>}
+        </table>}
+</body>
+</html>

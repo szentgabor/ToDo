@@ -1,0 +1,84 @@
+﻿@model TodoList.ViewModels.TodoAssignee
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Properties</th>
+        </tr>
+        <tr>
+            <td>@Model.TodoSelected.Id</td>
+            <td>
+                <form action="/@Model.TodoSelected.Id/edit" method="post">
+                    <div>
+                        <label>Name of Todo</label>
+                        <input type="text" name="Title" value="@Model.TodoSelected.Title" />
+                    </div>
+                    <div>
+                        <label>Due Date</label>
+                        <input type="datetime" name="DueDate" value="@Model.TodoSelected.DueDate" />
+                    </div>
+                    <div>
+                        <label>Urgent?</label>
+                        <select name="IsUrgent">
+                            @if (Model.TodoSelected.IsUrgent)
+                            {
+                                <option value="TRUE">Yes</option>
+                                <option value="FALSE">No</option>
+                            }
+                            else
+                            {
+                                <option value="FALSE">No</option>
+                                <option value="TRUE">Yes</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label>Is it done?</label>
+                        <select name="IsDone">
+                            @if (Model.TodoSelected.IsDone)
+                            {
+                                <option value="TRUE">Yes</option>
+                                <option value="FALSE">No</option>
+                            }
+                            else
+                            {
+                                <option value="FALSE">No</option>
+                                <option value="TRUE">Yes</option>
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label>Assignee</label>
+                        <select name="AssigneeID">
+                            <option value="" selected disabled hidden>Select an Assignee</option>
+                            @foreach (Assignee current in @Model.Assignees)
+                            {
+                                @if (current.ID == Model.TodoSelected.AssigneeID)
+                                {
+                                    <option value="@current.ID" selected>@current.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@current.ID">@current.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@model Assignee
+
+@{
+    ViewData["Title"] = "AssigneesList";
+}
+
+<h2>Edit Assignee</h2>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Properties</th>
+        </tr>
+        <tr>
+            <td>@Model.ID</td>
+            <td>
+                <form action="/@Model.ID/editassignee" method="post">
+                    <div>
+                        <label>Name of Assignee</label>
+                        <input type="text" name="Name" value="@Model.Name"/>
+                    </div>
+                    <div>
+                        <label>Email of Assignee</label>
+                        <input type="text" name="Email" value="@Model.Email"/>
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

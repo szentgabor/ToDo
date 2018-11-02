@@ -1,0 +1,44 @@
+﻿@model List<Assignee>
+@{
+    ViewData["Title"] = "List of Assignees";
+}
+
+<h2>List of Assignees</h2>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <a href="/@Model/editassignee" target="_self">Edit Assignee</a>
+    @if (Model.Count() > 0)
+    {<table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Todos assigned</th>
+                <th>Remove Assignees</th>
+                <th>Edit</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>
+                    <a href="/@item.ID/assigneetodos" target="_blank">See Todos</a>
+                </td>
+                <td>
+                    <form action="/@item.ID/deleteassignee" method="post">
+                        <input type="submit" value="Remove" class="btn btn-danger">
+                    </form>
+                </td>
+                <td>
+                    <a href="/@item.ID/editassignee" target="_self">Edit Assignee</a>
+                </td>
+
+            </tr>}
+        </table>}
+</body>
+</html>

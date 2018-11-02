@@ -1,0 +1,30 @@
+﻿@model TodoList.ViewModels.AssigneeTodos
+
+@{
+    ViewData["Title"] = "AssigneeTodos";
+}
+
+<h2>The Assignee's Todos:</h2>
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+    <title></title>
+</head>
+<body>
+    <table class="table table-striped">
+    <tr>
+        <th>Assignee</th>
+        <th>Todos</th>
+    </tr>
+    <tr>
+        <td>@Model.AssigneeSelected.Name</td>
+        <td>
+        @foreach (var item in Model.Todos)
+        {   
+            <div>@item.Title</div>
+        }
+        </td>
+    </tr>
+</table>
+</body>
+</html>

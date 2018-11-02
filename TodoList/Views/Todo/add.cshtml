@@ -1,0 +1,38 @@
+﻿@model List<Assignee>
+@{
+    ViewData["Title"] = "add";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>Add your new Todo!</h2>
+    <form action="add" method="post">
+        Add a ToDo!<br>
+        <input type="text" name="Title" required value=""><br>
+        <br>
+        <input type="datetime" name="DueDate" required value=""><br>
+        <br>
+        <label>IsUrgent:</label>
+        <input type="checkbox" name="IsUrgent" value="TRUE" />
+
+        <label>IsDone:</label>
+        <input type="checkbox" name="IsDone" value="TRUE" />
+        <br>
+        <select name="AssigneeID">
+            @if (Model != null)
+            {
+                <option value="" selected disabled hidden>Choose Assignee</option>
+                @foreach (Assignee item in @Model)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            }
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
